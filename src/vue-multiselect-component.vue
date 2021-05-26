@@ -71,11 +71,23 @@ export default {
     ValueItem, Editor, Close, Dropdown, DropdownList
   },
   props: {
-    writable: Boolean,
-    searchable: Boolean,
+    writable: {
+      type: Boolean,
+      default: true
+    },
+    searchable: {
+      type: Boolean,
+      default: true
+    },
     placeholder: String,
-    value: Array,
-    options: Array,
+    value: {
+      type: Array,
+      required: true
+    },
+    options: {
+      type: Array,
+      required: true
+    },
     loading: Boolean
   },
   data() {
