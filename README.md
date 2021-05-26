@@ -1,5 +1,7 @@
 # Multiselect component for Vue 2
 
+A multiselect component with support for Vue 2
+
 ## Install & basic usage
 ![img.png](docs/img.png)
 ```shell
@@ -10,6 +12,7 @@ $ npm install vue-multiselect-component
 <template>
   <VueMultiselectComponent
     v-model="selected"
+    :options="options"
   />
 </template>
 
@@ -50,7 +53,7 @@ export default {
 ## Events
 |Event|Description|Attributes|
 |-----|-----------|-----|
-|search-change|Emitted after the search query changes|(search-query)
+|search-change|Emitted after the search query changes|(search-query)|
 
 **will be complemented*
 

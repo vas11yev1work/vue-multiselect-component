@@ -1,7 +1,7 @@
 {
   "name": "vue-multiselect-component",
-  "version": "1.0.3",
-  "description": "A multi-select component with support for Vue 2",
+  "version": "1.0.4",
+  "description": "A multiselect component with support for Vue 2",
   "license": "MIT",
   "keywords": [
     "js",
