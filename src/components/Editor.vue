@@ -8,6 +8,7 @@
       @focus="$emit('focus')"
       @input="onInput"
       @keydown.delete="$emit('delete')"
+      class="vue2-editor-input"
     />
     <div ref="fake-text" class="fake">{{ value }}</div>
   </div>

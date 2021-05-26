@@ -1,13 +1,13 @@
 <template>
   <div :id="`vue2-multi-select-${_uid}`" class="vue2-multi-select-wrap" @click="openDropdown">
-    <div :class="{ 'vue2-open': isFocused }" class="vue2-multi-select">
+    <div :class="{ 'vue2-open': isOpen }" class="vue2-multi-select">
       <div class="vue2-value-items">
         <span v-if="!value.length && !inputValue" class="vue2-placeholder">{{ placeholder }}</span>
         <ValueItem
           v-for="item in listValue"
           :id="item"
           :key="item"
-          @click="removeItem"
+          @click="select"
         >
           {{ getItem(item).label }}
         </ValueItem>
@@ -19,10 +19,10 @@
           :is-empty="!value.length"
           :readonly="!writable"
           @delete="onDelete"
-          @focus="isFocused = true"
+          @focus="isOpen = true"
           @search-change="searchChange"
         />
-        <span v-if="value.length > 10 && !isFocused" class="vue2-input-info">
+        <span v-if="value.length > 10 && !isOpen" class="vue2-input-info">
           and {{ value.length - 10 }} more
         </span>
       </div>
@@ -37,7 +37,7 @@
           <Close :color="closeColor"/>
         </button>
         <button
-          :style="{ transform: isFocused ? 'rotateX(180deg)' : 'rotateX(0)'}"
+          :style="{ transform: isOpen ? 'rotateX(180deg)' : 'rotateX(0)'}"
           class="vue2-action"
           @mouseenter="dropdownColor = '#9f9f9f'"
           @mouseleave="dropdownColor = '#ccd4dd'"
@@ -48,13 +48,13 @@
       </div>
     </div>
     <DropdownList
-      v-show="isFocused"
+      v-show="isOpen"
       :is-search="!!searchValue.trim()"
       :loading="loading"
       :options="searchItems"
       :selected="value"
-      @remove="removeItem"
-      @select="selectItem"
+      @remove="select"
+      @select="select"
     />
   </div>
 </template>
@@ -95,7 +95,7 @@ export default {
       inputValue: '',
       closeColor: '#ccd4dd',
       dropdownColor: '#ccd4dd',
-      isFocused: false,
+      isOpen: false,
       searchValue: ''
     }
   },
@@ -105,18 +105,22 @@ export default {
     }
   },
   methods: {
+    searchChange(v) {
+      this.$emit('search-change', v)
+      this.searchValue = v
+    },
     openDropdown() {
       this.$refs.editor.$el.querySelector('input').focus()
     },
     toggleDropdown() {
-      if (this.isFocused) {
+      if (this.isOpen) {
         this.closeOptions()
       } else {
         this.openDropdown()
       }
     },
     closeOptions() {
-      this.isFocused = false
+      this.isOpen = false
       this.inputValue = ''
     },
     closeDropdown(e) {
@@ -124,27 +128,41 @@ export default {
         this.closeOptions()
       }
     },
+    select(id) {
+      const candidate = this.options.find(el => el.id === id)
+      if (!candidate) return
+
+      const isSelected = !!this.internalValue.find(el => el === id)
+      if (isSelected) {
+        this.removeItem(id)
+      } else {
+        this.selectItem(id)
+      }
+    },
     removeItem(id) {
-      const index = this.value.findIndex(itemId => itemId === id)
-      this.value.splice(index, 1)
+      const index = this.internalValue.findIndex(itemId => itemId === id)
+      const newValue = this.internalValue.slice(0, index).concat(this.internalValue.slice(index + 1))
+      this.$emit('input', newValue)
+      this.$emit('removed', id)
     },
     selectItem(id) {
-      this.value.push(id)
+      const newValue = [...this.internalValue, id]
+      this.$emit('input', newValue)
+      this.$emit('selected', id)
     },
     onDelete() {
       if (!this.inputValue) {
-        this.value.splice(this.value.length - 1, 1)
+        this.removeItem(this.internalValue[this.internalValue.length - 1])
       }
     },
     clearItems() {
-      this.value.splice(0, this.value.length)
-    },
-    searchChange(search) {
-      this.$emit('search-change', search)
-      this.searchValue = search
+      this.$emit('input', [])
     }
   },
   computed: {
+    internalValue() {
+      return this.value || []
+    },
     getItem() {
       return id => {
         return this.options.find(el => el.id === id)
@@ -157,10 +175,10 @@ export default {
       return this.options || []
     },
     listValue() {
-      if (this.value.length > 10 && !this.isFocused) {
-        return this.value.slice(0, 10)
+      if (this.internalValue.length > 10 && !this.isOpen) {
+        return this.internalValue.slice(0, 10)
       }
-      return this.value
+      return this.internalValue
     }
   },
   beforeDestroy() {

@@ -210,6 +210,7 @@ const __vue_component__$7 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
+//
 var script$6 = {
   props: {
     value: {
@@ -263,6 +264,7 @@ var __vue_render__$6 = function () {
       'vue2-empty': _vm.isEmpty
     }
   }, [_c('input', {
+    staticClass: "vue2-editor-input",
     attrs: {
       "readonly": _vm.readonly,
       "type": "text"
@@ -297,8 +299,8 @@ var __vue_staticRenderFns__$6 = [];
 
 const __vue_inject_styles__$6 = function (inject) {
   if (!inject) return;
-  inject("data-v-371dfa72_0", {
-    source: ".vue2-editor[data-v-371dfa72]{margin:5px 5px 0 0;max-width:100%}.vue2-editor.vue2-empty[data-v-371dfa72]{margin:5px 5px 0 5px}.vue2-editor input[data-v-371dfa72]{min-height:28px;font-size:14px;width:100%;outline:0;border:none;min-width:15px;background-color:transparent}.vue2-editor .fake[data-v-371dfa72]{font-size:14px;position:absolute;visibility:hidden;opacity:0;left:-6000px;font-family:\"Open Sans\",sans-serif;white-space:pre}",
+  inject("data-v-09827013_0", {
+    source: ".vue2-editor[data-v-09827013]{margin:5px 5px 0 0;max-width:100%}.vue2-editor.vue2-empty[data-v-09827013]{margin:5px 5px 0 5px}.vue2-editor input[data-v-09827013]{min-height:28px;font-size:14px;width:100%;outline:0;border:none;min-width:15px;background-color:transparent}.vue2-editor .fake[data-v-09827013]{font-size:14px;position:absolute;visibility:hidden;opacity:0;left:-6000px;font-family:\"Open Sans\",sans-serif;white-space:pre}",
     map: undefined,
     media: undefined
   });
@@ -306,7 +308,7 @@ const __vue_inject_styles__$6 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$6 = "data-v-371dfa72";
+const __vue_scope_id__$6 = "data-v-09827013";
 /* module identifier */
 
 const __vue_module_identifier__$6 = undefined;
@@ -677,7 +679,11 @@ var __vue_render__$1 = function () {
     staticClass: "vue2-info"
   }, [_c('span', {
     staticClass: "vue2-info-text"
-  }, [_vm._v("Loading...")])]) : _vm._e()]);
+  }, [_vm._v("Loading...")])]) : _vm._e(), _vm._v(" "), !_vm.loading && !_vm.optionsList.length ? _c('div', {
+    staticClass: "vue2-info"
+  }, [_c('span', {
+    staticClass: "vue2-info-text"
+  }, [_vm._v("No content")])]) : _vm._e()]);
 };
 
 var __vue_staticRenderFns__$1 = [];
@@ -685,8 +691,8 @@ var __vue_staticRenderFns__$1 = [];
 
 const __vue_inject_styles__$1 = function (inject) {
   if (!inject) return;
-  inject("data-v-ddf2e6b0_0", {
-    source: ".vue2-dropdown-list[data-v-ddf2e6b0]{border:1px solid #ccd4dd;border-top:none;border-radius:0 0 5px 5px;padding:5px 0;max-height:235px;overflow-x:auto;background-color:#fff;position:absolute;left:0;right:0}.vue2-dropdown-list .vue2-list[data-v-ddf2e6b0]{list-style:none}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-ddf2e6b0]{min-height:32px;padding:4px 7px;display:flex;align-items:center;cursor:pointer}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-ddf2e6b0]:hover{background-color:rgba(11,149,214,.06)}.vue2-dropdown-list .vue2-list .vue2-list-item .vue2-item-text[data-v-ddf2e6b0]{font-size:14px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox-empty[data-v-ddf2e6b0]{display:block;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox[data-v-ddf2e6b0]{display:none;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox-empty[data-v-ddf2e6b0]{display:none}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox[data-v-ddf2e6b0]{display:block}.vue2-dropdown-list .vue2-info[data-v-ddf2e6b0]{text-align:center}.vue2-dropdown-list .vue2-info .vue2-info-text[data-v-ddf2e6b0]{font-size:14px}",
+  inject("data-v-05018a42_0", {
+    source: ".vue2-dropdown-list[data-v-05018a42]{border:1px solid #ccd4dd;border-top:none;border-radius:0 0 5px 5px;padding:5px 0;max-height:235px;overflow-x:auto;background-color:#fff;position:absolute;left:0;right:0}.vue2-dropdown-list .vue2-list[data-v-05018a42]{list-style:none}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-05018a42]{min-height:32px;padding:4px 7px;display:flex;align-items:center;cursor:pointer}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-05018a42]:hover{background-color:rgba(11,149,214,.06)}.vue2-dropdown-list .vue2-list .vue2-list-item .vue2-item-text[data-v-05018a42]{font-size:14px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox-empty[data-v-05018a42]{display:block;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox[data-v-05018a42]{display:none;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox-empty[data-v-05018a42]{display:none}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox[data-v-05018a42]{display:block}.vue2-dropdown-list .vue2-info[data-v-05018a42]{text-align:center}.vue2-dropdown-list .vue2-info .vue2-info-text[data-v-05018a42]{font-size:14px}",
     map: undefined,
     media: undefined
   });
@@ -694,7 +700,7 @@ const __vue_inject_styles__$1 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$1 = "data-v-ddf2e6b0";
+const __vue_scope_id__$1 = "data-v-05018a42";
 /* module identifier */
 
 const __vue_module_identifier__$1 = undefined;
@@ -720,11 +726,23 @@ var script = {
     DropdownList: __vue_component__$1
   },
   props: {
-    writable: Boolean,
-    searchable: Boolean,
+    writable: {
+      type: Boolean,
+      default: true
+    },
+    searchable: {
+      type: Boolean,
+      default: true
+    },
     placeholder: String,
-    value: Array,
-    options: Array,
+    value: {
+      type: Array,
+      required: true
+    },
+    options: {
+      type: Array,
+      required: true
+    },
     loading: Boolean
   },
 
@@ -733,7 +751,7 @@ var script = {
       inputValue: '',
       closeColor: '#ccd4dd',
       dropdownColor: '#ccd4dd',
-      isFocused: false,
+      isOpen: false,
       searchValue: ''
     };
   },
@@ -745,43 +763,75 @@ var script = {
   },
 
   methods: {
+    searchChange(v) {
+      this.$emit('search-change', v);
+      this.searchValue = v;
+    },
+
     openDropdown() {
       this.$refs.editor.$el.querySelector('input').focus();
     },
 
+    toggleDropdown() {
+      if (this.isOpen) {
+        this.closeOptions();
+      } else {
+        this.openDropdown();
+      }
+    },
+
+    closeOptions() {
+      this.isOpen = false;
+      this.inputValue = '';
+    },
+
     closeDropdown(e) {
       if (!e.target.closest(`#vue2-multi-select-${this._uid}`)) {
-        this.isFocused = false;
-        this.inputValue = '';
+        this.closeOptions();
+      }
+    },
+
+    select(id) {
+      const candidate = this.options.find(el => el.id === id);
+      if (!candidate) return;
+      const isSelected = !!this.internalValue.find(el => el === id);
+
+      if (isSelected) {
+        this.removeItem(id);
+      } else {
+        this.selectItem(id);
       }
     },
 
     removeItem(id) {
-      const index = this.value.findIndex(itemId => itemId === id);
-      this.value.splice(index, 1);
+      const index = this.internalValue.findIndex(itemId => itemId === id);
+      const newValue = this.internalValue.slice(0, index).concat(this.internalValue.slice(index + 1));
+      this.$emit('input', newValue);
+      this.$emit('removed', id);
     },
 
     selectItem(id) {
-      this.value.push(id);
+      const newValue = [...this.internalValue, id];
+      this.$emit('input', newValue);
+      this.$emit('selected', id);
     },
 
     onDelete() {
       if (!this.inputValue) {
-        this.value.splice(this.value.length - 1, 1);
+        this.removeItem(this.internalValue[this.internalValue.length - 1]);
       }
     },
 
     clearItems() {
-      this.value.splice(0, this.value.length);
-    },
-
-    searchChange(search) {
-      this.$emit('search-change', search);
-      this.searchValue = search;
+      this.$emit('input', []);
     }
 
   },
   computed: {
+    internalValue() {
+      return this.value || [];
+    },
+
     getItem() {
       return id => {
         return this.options.find(el => el.id === id);
@@ -797,11 +847,11 @@ var script = {
     },
 
     listValue() {
-      if (this.value.length > 10 && !this.isFocused) {
-        return this.value.slice(0, 10);
+      if (this.internalValue.length > 10 && !this.isOpen) {
+        return this.internalValue.slice(0, 10);
       }
 
-      return this.value;
+      return this.internalValue;
     }
 
   },
@@ -834,7 +884,7 @@ var __vue_render__ = function () {
   }, [_c('div', {
     staticClass: "vue2-multi-select",
     class: {
-      'vue2-open': _vm.isFocused
+      'vue2-open': _vm.isOpen
     }
   }, [_c('div', {
     staticClass: "vue2-value-items"
@@ -847,7 +897,7 @@ var __vue_render__ = function () {
         "id": item
       },
       on: {
-        "click": _vm.removeItem
+        "click": _vm.select
       }
     }, [_vm._v("\n        " + _vm._s(_vm.getItem(item).label) + "\n      ")]);
   }), _vm._v(" "), _c('Editor', {
@@ -863,7 +913,7 @@ var __vue_render__ = function () {
     on: {
       "delete": _vm.onDelete,
       "focus": function ($event) {
-        _vm.isFocused = true;
+        _vm.isOpen = true;
       },
       "search-change": _vm.searchChange
     },
@@ -874,7 +924,7 @@ var __vue_render__ = function () {
       },
       expression: "inputValue"
     }
-  }), _vm._v(" "), _vm.value.length > 10 && !_vm.isFocused ? _c('span', {
+  }), _vm._v(" "), _vm.value.length > 10 && !_vm.isOpen ? _c('span', {
     staticClass: "vue2-input-info"
   }, [_vm._v("\n        and " + _vm._s(_vm.value.length - 10) + " more\n      ")]) : _vm._e()], 2), _vm._v(" "), _c('div', {
     staticClass: "vue2-actions"
@@ -899,7 +949,7 @@ var __vue_render__ = function () {
   })], 1) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "vue2-action",
     style: {
-      transform: _vm.isFocused ? 'rotateX(180deg)' : 'rotateX(0)'
+      transform: _vm.isOpen ? 'rotateX(180deg)' : 'rotateX(0)'
     },
     on: {
       "mouseenter": function ($event) {
@@ -910,7 +960,7 @@ var __vue_render__ = function () {
       },
       "click": function ($event) {
         $event.stopPropagation();
-        return _vm.openDropdown($event);
+        return _vm.toggleDropdown($event);
       }
     }
   }, [_c('Dropdown', {
@@ -922,8 +972,8 @@ var __vue_render__ = function () {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: _vm.isFocused,
-      expression: "isFocused"
+      value: _vm.isOpen,
+      expression: "isOpen"
     }],
     attrs: {
       "is-search": !!_vm.searchValue.trim(),
@@ -932,8 +982,8 @@ var __vue_render__ = function () {
       "selected": _vm.value
     },
     on: {
-      "remove": _vm.removeItem,
-      "select": _vm.selectItem
+      "remove": _vm.select,
+      "select": _vm.select
     }
   })], 1);
 };
@@ -943,7 +993,7 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-0e8905ce_0", {
+  inject("data-v-23da3c26_0", {
     source: "@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);*,::after,::before{margin:0;padding:0;box-sizing:border-box;font-family:\"Open Sans\",sans-serif}.vue2-multi-select-wrap{position:relative}.vue2-multi-select{width:100%;border:1px solid #ccd4dd;border-radius:5px;padding:0 5px 5px 5px;cursor:text;display:flex}.vue2-multi-select.vue2-open{border-radius:5px 5px 0 0}.vue2-multi-select .vue2-value-items{display:flex;flex-wrap:wrap;width:calc(100% - 50px);position:relative}.vue2-multi-select .vue2-value-items .vue2-transition-list{display:flex;flex-wrap:wrap}.vue2-multi-select .vue2-value-items .vue2-placeholder{position:absolute;margin-left:5px;z-index:-1}.vue2-multi-select .vue2-value-items .vue2-input-info{cursor:pointer}.vue2-multi-select .vue2-value-items .vue2-input-info,.vue2-multi-select .vue2-value-items .vue2-placeholder{line-height:28px;margin-top:5px;font-size:14px;color:#a7a7a7;user-select:none}.vue2-multi-select .vue2-actions{width:50px;padding-top:5px;display:flex;justify-content:flex-end}.vue2-multi-select .vue2-actions .vue2-action{height:100%;width:25px;border:none;background-color:transparent;border-radius:0;cursor:pointer}.vue2-multi-select .vue2-actions .vue2-action .dropdown{width:11px}",
     map: undefined,
     media: undefined

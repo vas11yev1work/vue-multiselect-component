@@ -53,7 +53,10 @@ export default {
 ## Events
 |Event|Description|Attributes|
 |-----|-----------|-----|
-|search-change|Emitted after the search query changes|(search-query)|
+|search-change|Called whenever the search field has changed|(search-query)|
+|input|Called whenever the value changes passing the new value|(value-list)|
+|selected|Called whenever an element is selected|(id)|
+|removed|Called whenever an element is removed|(id)|
 
 **will be complemented*
 
