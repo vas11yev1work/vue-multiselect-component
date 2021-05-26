@@ -41,7 +41,7 @@
           class="vue2-action"
           @mouseenter="dropdownColor = '#9f9f9f'"
           @mouseleave="dropdownColor = '#ccd4dd'"
-          @click.stop="openDropdown"
+          @click.stop="toggleDropdown"
         >
           <Dropdown :color="dropdownColor" class="dropdown"/>
         </button>
@@ -108,10 +108,20 @@ export default {
     openDropdown() {
       this.$refs.editor.$el.querySelector('input').focus()
     },
+    toggleDropdown() {
+      if (this.isFocused) {
+        this.closeOptions()
+      } else {
+        this.openDropdown()
+      }
+    },
+    closeOptions() {
+      this.isFocused = false
+      this.inputValue = ''
+    },
     closeDropdown(e) {
       if (!e.target.closest(`#vue2-multi-select-${this._uid}`)) {
-        this.isFocused = false
-        this.inputValue = ''
+        this.closeOptions()
       }
     },
     removeItem(id) {

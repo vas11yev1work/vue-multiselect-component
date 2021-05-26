@@ -18,6 +18,9 @@
     <div v-if="loading" class="vue2-info">
       <span class="vue2-info-text">Loading...</span>
     </div>
+    <div v-if="!loading && !optionsList.length" class="vue2-info">
+      <span class="vue2-info-text">No content</span>
+    </div>
   </div>
 </template>
 
