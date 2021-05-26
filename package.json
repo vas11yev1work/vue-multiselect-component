@@ -15,10 +15,10 @@
     "type": "git",
     "url": "https://github.com/vas11yev1work/vue-multiselect-component"
   },
-  "main": "dist/vue2-multi-select.ssr.js",
-  "browser": "dist/vue2-multi-select.esm.js",
-  "module": "dist/vue2-multi-select.esm.js",
-  "unpkg": "dist/vue2-multi-select.min.js",
+  "main": "dist/vue-multiselect-component.ssr.js",
+  "browser": "dist/vue-multiselect-component.esm.js",
+  "module": "dist/vue-multiselect-component.esm.js",
+  "unpkg": "dist/vue-multiselect-component.min.js",
   "files": [
     "dist/*",
     "src/**/*.vue"
