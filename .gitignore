@@ -22,8 +22,6 @@ yarn-error.log*
 
 # Project specific
 coverage
-dev
-build
 test/unit/coverage
 package-lock.json
 dev/dist
