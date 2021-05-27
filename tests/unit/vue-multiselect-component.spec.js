@@ -86,5 +86,34 @@ describe('vue-multiselect-component.vue', () => {
         expect(wrapper.emitted()['search-change'].length).toBe(1)
       })
     })
+    describe('@close', () => {
+      test('should be called whenever the list is closed', () => {
+        const wrapper = shallowMount(VueMultiselectComponent, {
+          propsData: {
+            value: ['ru', 'fr'],
+            options: mockOptions
+          }
+        })
+        wrapper.setData({ isOpen: true })
+        expect(wrapper.vm.isOpen).toBe(true)
+        wrapper.vm.closeOptions()
+        expect(wrapper.emitted().close.length).toBe(1)
+        expect(wrapper.vm.isOpen).toBe(false)
+      })
+    })
+    describe('@open', () => {
+      test('should be called whenever the list is opened', () => {
+        const wrapper = shallowMount(VueMultiselectComponent, {
+          propsData: {
+            value: ['ru', 'fr'],
+            options: mockOptions
+          }
+        })
+        expect(wrapper.vm.isOpen).toBe(false)
+        wrapper.vm.openOptions()
+        expect(wrapper.emitted().open.length).toBe(1)
+        expect(wrapper.vm.isOpen).toBe(true)
+      })
+    })
   })
 })

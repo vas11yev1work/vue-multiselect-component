@@ -33,6 +33,8 @@ export default Vue.extend({
       writable
       placeholder="Select countries"
       :options="countries"
+      @open="test('open', 1)"
+      @close="test('close', 2)"
     />
   </div>
 </template>

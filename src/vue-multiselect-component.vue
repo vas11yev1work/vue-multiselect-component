@@ -19,11 +19,11 @@
           :is-empty="!value.length"
           :readonly="!writable"
           @delete="onDelete"
-          @focus="isOpen = true"
+          @focus="openOptions"
           @search-change="searchChange"
         />
-        <span v-if="value.length > 10 && !isOpen" class="vue2-input-info">
-          and {{ value.length - 10 }} more
+        <span v-if="value.length > limit && !isOpen" class="vue2-input-info">
+          and {{ value.length - limit }} more
         </span>
       </div>
       <div class="vue2-actions">
@@ -88,7 +88,11 @@ export default {
       type: Array,
       required: true
     },
-    loading: Boolean
+    loading: Boolean,
+    limit: {
+      type: Number,
+      default: 10
+    }
   },
   data() {
     return {
@@ -120,8 +124,15 @@ export default {
       }
     },
     closeOptions() {
+      this.$emit('close')
       this.isOpen = false
       this.inputValue = ''
+    },
+    openOptions() {
+      if (!this.isOpen) {
+        this.$emit('open')
+        this.isOpen = true
+      }
     },
     closeDropdown(e) {
       if (!e.target.closest(`#vue2-multi-select-${this._uid}`)) {
@@ -175,8 +186,8 @@ export default {
       return this.options || []
     },
     listValue() {
-      if (this.internalValue.length > 10 && !this.isOpen) {
-        return this.internalValue.slice(0, 10)
+      if (this.internalValue.length > this.limit && !this.isOpen) {
+        return this.internalValue.slice(0, this.limit)
       }
       return this.internalValue
     }

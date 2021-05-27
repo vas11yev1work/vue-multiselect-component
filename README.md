@@ -47,6 +47,7 @@ export default {
 |searchable|Standard element search (only for writable = true)|false|Boolean|true|
 |placeholder|Input placeholder|false|String|-|
 |loading|Options list standby mode|false|Boolean|false|
+|limit|Limit the number of visible items when the options list is closed|false|Number|10|
 
 **will be complemented*
 
@@ -57,6 +58,8 @@ export default {
 |input|Called whenever the value changes passing the new value|(value-list)|
 |selected|Called whenever an element is selected|(id)|
 |removed|Called whenever an element is removed|(id)|
+|open|Called whenever the list is opened|-|
+|close|Called whenever the list is closed|-|
 
 **will be complemented*
 
