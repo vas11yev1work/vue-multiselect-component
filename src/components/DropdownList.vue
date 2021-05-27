@@ -59,6 +59,7 @@ export default {
   overflow-x: auto;
   background-color: #ffffff;
   position: absolute;
+  z-index: 100;
   left: 0;
   right: 0;
 
