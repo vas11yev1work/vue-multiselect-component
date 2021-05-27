@@ -5,32 +5,48 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Example</title>
+  <style>
+    #app {
+      max-width: 400px;
+      padding: 30px;
+    }
+    .info {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
-<div id="app">
-  <VueMultiselectComponent
-    v-model="selected"
-    :options="options"
-  ></VueMultiselectComponent>
-</div>
+<div id="root"></div>
 
 <script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
 <script src="https://unpkg.com/vue-multiselect-component"></script>
 
 <script>
   new Vue({
-    el: '#app',
+    el: '#root',
     components: {
       VueMultiselectComponent: Vue2MultiSelect
     },
     data() {
       return {
         selected: [],
-        options: [{ id: '1', label: '1' }, { id: '2', label: '2' }]
+        options: [{ id: 'ru', label: 'Russia' }, { id: 'nl', label: 'Netherlands' }]
       }
-    }
+    },
+    template: `
+      <div id="app">
+        <span class="info">*will be complemented</span>
+        <VueMultiselectComponent
+          v-model="selected"
+          :options="options"
+          placeholder="Start typing"
+        />
+      </div>
+    `
   })
 </script>
 </body>
