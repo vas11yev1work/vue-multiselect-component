@@ -662,7 +662,11 @@ var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
       type: Array,
       required: true
     },
-    loading: Boolean
+    loading: Boolean,
+    limit: {
+      type: Number,
+      default: 10
+    }
   },
   data: function data() {
     return {
@@ -699,8 +703,10 @@ var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
       this.inputValue = '';
     },
     openOptions: function openOptions() {
-      this.$emit('open');
-      this.isOpen = true;
+      if (!this.isOpen) {
+        this.$emit('open');
+        this.isOpen = true;
+      }
     },
     closeDropdown: function closeDropdown(e) {
       if (!e.target.closest("#vue2-multi-select-".concat(this._uid))) {
@@ -769,8 +775,8 @@ var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
       return this.options || [];
     },
     listValue: function listValue() {
-      if (this.internalValue.length > 10 && !this.isOpen) {
-        return this.internalValue.slice(0, 10);
+      if (this.internalValue.length > this.limit && !this.isOpen) {
+        return this.internalValue.slice(0, this.limit);
       }
 
       return this.internalValue;
@@ -832,7 +838,7 @@ var __vue_render__ = function __vue_render__() {
       },
       expression: "inputValue"
     }
-  }), _vm._ssrNode(" " + (_vm.value.length > 10 && !_vm.isOpen ? "<span class=\"vue2-input-info\">" + _vm._ssrEscape("\n        and " + _vm._s(_vm.value.length - 10) + " more\n      ") + "</span>" : "<!---->"))], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"vue2-actions\">", "</div>", [_vm.value.length ? _vm._ssrNode("<button class=\"vue2-action\">", "</button>", [_c('Close', {
+  }), _vm._ssrNode(" " + (_vm.value.length > _vm.limit && !_vm.isOpen ? "<span class=\"vue2-input-info\">" + _vm._ssrEscape("\n        and " + _vm._s(_vm.value.length - _vm.limit) + " more\n      ") + "</span>" : "<!---->"))], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"vue2-actions\">", "</div>", [_vm.value.length ? _vm._ssrNode("<button class=\"vue2-action\">", "</button>", [_c('Close', {
     attrs: {
       "color": _vm.closeColor
     }
@@ -868,7 +874,7 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-5a41b05c_0", {
+  inject("data-v-702f48ca_0", {
     source: "@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);*,::after,::before{margin:0;padding:0;box-sizing:border-box;font-family:\"Open Sans\",sans-serif}.vue2-multi-select-wrap{position:relative}.vue2-multi-select{width:100%;border:1px solid #ccd4dd;border-radius:5px;padding:0 5px 5px 5px;cursor:text;display:flex}.vue2-multi-select.vue2-open{border-radius:5px 5px 0 0}.vue2-multi-select .vue2-value-items{display:flex;flex-wrap:wrap;width:calc(100% - 50px);position:relative}.vue2-multi-select .vue2-value-items .vue2-transition-list{display:flex;flex-wrap:wrap}.vue2-multi-select .vue2-value-items .vue2-placeholder{position:absolute;margin-left:5px;z-index:-1}.vue2-multi-select .vue2-value-items .vue2-input-info{cursor:pointer}.vue2-multi-select .vue2-value-items .vue2-input-info,.vue2-multi-select .vue2-value-items .vue2-placeholder{line-height:28px;margin-top:5px;font-size:14px;color:#a7a7a7;user-select:none}.vue2-multi-select .vue2-actions{width:50px;padding-top:5px;display:flex;justify-content:flex-end}.vue2-multi-select .vue2-actions .vue2-action{height:100%;width:25px;border:none;background-color:transparent;border-radius:0;cursor:pointer}.vue2-multi-select .vue2-actions .vue2-action .dropdown{width:11px}",
     map: undefined,
     media: undefined
@@ -880,7 +886,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 var __vue_scope_id__ = undefined;
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-5a41b05c";
+var __vue_module_identifier__ = "data-v-702f48ca";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
