@@ -621,7 +621,8 @@ var script$1 = {
     options: Array,
     selected: Array,
     loading: Boolean,
-    isSearch: Boolean
+    isSearch: Boolean,
+    labelText: String
   },
   components: {
     CheckboxEmpty: __vue_component__$3,
@@ -674,7 +675,7 @@ var __vue_render__$1 = function () {
       staticClass: "checkbox"
     })], 1), _vm._v(" "), _c('span', {
       staticClass: "vue2-item-text"
-    }, [_vm._v(_vm._s(item.label))])]);
+    }, [_vm._v(_vm._s(item[_vm.labelText]))])]);
   }), 0) : _vm._e(), _vm._v(" "), _vm.loading ? _c('div', {
     staticClass: "vue2-info"
   }, [_c('span', {
@@ -691,8 +692,8 @@ var __vue_staticRenderFns__$1 = [];
 
 const __vue_inject_styles__$1 = function (inject) {
   if (!inject) return;
-  inject("data-v-84143864_0", {
-    source: ".vue2-dropdown-list[data-v-84143864]{border:1px solid #ccd4dd;border-top:none;border-radius:0 0 5px 5px;padding:5px 0;max-height:235px;overflow-x:auto;background-color:#fff;position:absolute;z-index:100;left:0;right:0}.vue2-dropdown-list .vue2-list[data-v-84143864]{list-style:none}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-84143864]{min-height:32px;padding:4px 7px;display:flex;align-items:center;cursor:pointer}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-84143864]:hover{background-color:rgba(11,149,214,.06)}.vue2-dropdown-list .vue2-list .vue2-list-item .vue2-item-text[data-v-84143864]{font-size:14px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox-empty[data-v-84143864]{display:block;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox[data-v-84143864]{display:none;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox-empty[data-v-84143864]{display:none}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox[data-v-84143864]{display:block}.vue2-dropdown-list .vue2-info[data-v-84143864]{text-align:center}.vue2-dropdown-list .vue2-info .vue2-info-text[data-v-84143864]{font-size:14px}",
+  inject("data-v-b5449558_0", {
+    source: ".vue2-dropdown-list[data-v-b5449558]{border:1px solid #ccd4dd;border-top:none;border-radius:0 0 5px 5px;padding:5px 0;max-height:235px;overflow-x:auto;background-color:#fff;position:absolute;z-index:100;left:0;right:0}.vue2-dropdown-list .vue2-list[data-v-b5449558]{list-style:none}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-b5449558]{min-height:32px;padding:4px 7px;display:flex;align-items:center;cursor:pointer}.vue2-dropdown-list .vue2-list .vue2-list-item[data-v-b5449558]:hover{background-color:rgba(11,149,214,.06)}.vue2-dropdown-list .vue2-list .vue2-list-item .vue2-item-text[data-v-b5449558]{font-size:14px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox-empty[data-v-b5449558]{display:block;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item .checkbox[data-v-b5449558]{display:none;width:16px;margin-right:7px}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox-empty[data-v-b5449558]{display:none}.vue2-dropdown-list .vue2-list .vue2-list-item.vue2-selected .vue2-checkbox .checkbox[data-v-b5449558]{display:block}.vue2-dropdown-list .vue2-info[data-v-b5449558]{text-align:center}.vue2-dropdown-list .vue2-info .vue2-info-text[data-v-b5449558]{font-size:14px}",
     map: undefined,
     media: undefined
   });
@@ -700,7 +701,7 @@ const __vue_inject_styles__$1 = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__$1 = "data-v-84143864";
+const __vue_scope_id__$1 = "data-v-b5449558";
 /* module identifier */
 
 const __vue_module_identifier__$1 = undefined;
@@ -747,7 +748,12 @@ var script = {
     limit: {
       type: Number,
       default: 10
-    }
+    },
+    labelText: {
+      type: String,
+      default: 'label'
+    },
+    placeholderAsLabel: Boolean
   },
 
   data() {
@@ -785,9 +791,11 @@ var script = {
     },
 
     closeOptions() {
-      this.$emit('close');
-      this.isOpen = false;
-      this.inputValue = '';
+      if (this.isOpen) {
+        this.$emit('close');
+        this.isOpen = false;
+        this.inputValue = '';
+      }
     },
 
     openOptions() {
@@ -836,6 +844,10 @@ var script = {
 
     clearItems() {
       this.$emit('input', []);
+    },
+
+    getItem(id) {
+      return this.options.find(el => el.id === id);
     }
 
   },
@@ -844,15 +856,9 @@ var script = {
       return this.value || [];
     },
 
-    getItem() {
-      return id => {
-        return this.options.find(el => el.id === id);
-      };
-    },
-
     searchItems() {
       if (this.searchable && this.searchValue.trim() && this.options.length) {
-        return this.options.filter(el => el.label.toLowerCase().includes(this.searchValue.toLowerCase()));
+        return this.options.filter(el => el[this.labelText].toLowerCase().includes(this.searchValue.toLowerCase()));
       }
 
       return this.options || [];
@@ -896,13 +902,17 @@ var __vue_render__ = function () {
   }, [_c('div', {
     staticClass: "vue2-multi-select",
     class: {
-      'vue2-open': _vm.isOpen
+      'vue2-open': _vm.isOpen,
+      'as-label': _vm.placeholderAsLabel
     }
   }, [_c('div', {
     staticClass: "vue2-value-items"
-  }, [!_vm.value.length && !_vm.inputValue ? _c('span', {
-    staticClass: "vue2-placeholder"
-  }, [_vm._v(_vm._s(_vm.placeholder))]) : _vm._e(), _vm._v(" "), _vm._l(_vm.listValue, function (item) {
+  }, [(!_vm.placeholderAsLabel ? !_vm.value.length && !_vm.inputValue : true) ? _c('span', {
+    staticClass: "vue2-placeholder",
+    class: {
+      active: _vm.placeholderAsLabel && _vm.value.length || _vm.placeholderAsLabel && _vm.inputValue
+    }
+  }, [_vm._v("\n        " + _vm._s(_vm.placeholder) + "\n      ")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.listValue, function (item) {
     return _c('ValueItem', {
       key: item,
       attrs: {
@@ -911,7 +921,7 @@ var __vue_render__ = function () {
       on: {
         "click": _vm.select
       }
-    }, [_vm._v("\n        " + _vm._s(_vm.getItem(item).label) + "\n      ")]);
+    }, [_vm._v("\n        " + _vm._s(_vm.getItem(item)[_vm.labelText]) + "\n      ")]);
   }), _vm._v(" "), _c('Editor', {
     key: "editor",
     ref: "editor",
@@ -989,7 +999,8 @@ var __vue_render__ = function () {
       "is-search": !!_vm.searchValue.trim(),
       "loading": _vm.loading,
       "options": _vm.searchItems,
-      "selected": _vm.value
+      "selected": _vm.value,
+      "label-text": _vm.labelText
     },
     on: {
       "remove": _vm.select,
@@ -1003,8 +1014,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-702f48ca_0", {
-    source: "@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);*,::after,::before{margin:0;padding:0;box-sizing:border-box;font-family:\"Open Sans\",sans-serif}.vue2-multi-select-wrap{position:relative}.vue2-multi-select{width:100%;border:1px solid #ccd4dd;border-radius:5px;padding:0 5px 5px 5px;cursor:text;display:flex}.vue2-multi-select.vue2-open{border-radius:5px 5px 0 0}.vue2-multi-select .vue2-value-items{display:flex;flex-wrap:wrap;width:calc(100% - 50px);position:relative}.vue2-multi-select .vue2-value-items .vue2-transition-list{display:flex;flex-wrap:wrap}.vue2-multi-select .vue2-value-items .vue2-placeholder{position:absolute;margin-left:5px;z-index:-1}.vue2-multi-select .vue2-value-items .vue2-input-info{cursor:pointer}.vue2-multi-select .vue2-value-items .vue2-input-info,.vue2-multi-select .vue2-value-items .vue2-placeholder{line-height:28px;margin-top:5px;font-size:14px;color:#a7a7a7;user-select:none}.vue2-multi-select .vue2-actions{width:50px;padding-top:5px;display:flex;justify-content:flex-end}.vue2-multi-select .vue2-actions .vue2-action{height:100%;width:25px;border:none;background-color:transparent;border-radius:0;cursor:pointer}.vue2-multi-select .vue2-actions .vue2-action .dropdown{width:11px}",
+  inject("data-v-837aafce_0", {
+    source: "@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);*,::after,::before{margin:0;padding:0;box-sizing:border-box;font-family:\"Open Sans\",sans-serif}.vue2-multi-select-wrap{position:relative}.vue2-multi-select{width:100%;border:1px solid #ccd4dd;border-radius:5px;padding:0 5px 5px 5px;cursor:text;display:flex}.vue2-multi-select.as-label{padding:3px 5px 5px 5px}.vue2-multi-select.vue2-open{border-radius:5px 5px 0 0}.vue2-multi-select .vue2-value-items{display:flex;flex-wrap:wrap;width:calc(100% - 50px);position:relative}.vue2-multi-select .vue2-value-items .vue2-transition-list{display:flex;flex-wrap:wrap}.vue2-multi-select .vue2-value-items .vue2-placeholder{position:absolute;margin-left:5px;z-index:-1;transition:.25s;top:0}.vue2-multi-select .vue2-value-items .vue2-placeholder.active{top:-17px;line-height:14px;font-size:13px;background-color:#fff;padding:0 2px;z-index:5}.vue2-multi-select .vue2-value-items .vue2-input-info{cursor:pointer}.vue2-multi-select .vue2-value-items .vue2-input-info,.vue2-multi-select .vue2-value-items .vue2-placeholder{line-height:28px;margin-top:5px;font-size:14px;color:#a7a7a7;user-select:none}.vue2-multi-select .vue2-actions{width:50px;padding-top:5px;display:flex;justify-content:flex-end}.vue2-multi-select .vue2-actions .vue2-action{height:100%;width:25px;border:none;background-color:transparent;border-radius:0;cursor:pointer}.vue2-multi-select .vue2-actions .vue2-action .dropdown{width:11px}",
     map: undefined,
     media: undefined
   });
