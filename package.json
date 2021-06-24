@@ -1,6 +1,6 @@
 {
   "name": "vue-multiselect-component",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "A multiselect component with support for Vue 2",
   "author": "Anatoliy Vasilyev <vas11yev.work@ya.ru>",
   "scripts": {
@@ -9,7 +9,8 @@
     "test:unit": "vue-cli-service test:unit",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
+    "publish": "npm run build && npm publish"
   },
   "main": "dist/vue-multiselect-component.ssr.js",
   "module": "dist/vue-multiselect-component.esm.js",

@@ -12,7 +12,7 @@
           <CheckboxEmpty class="checkbox-empty"/>
           <Checkbox class="checkbox"/>
         </div>
-        <span class="vue2-item-text">{{ item.label }}</span>
+        <span class="vue2-item-text">{{ item[labelText] }}</span>
       </li>
     </ul>
     <div v-if="loading" class="vue2-info">
@@ -33,7 +33,8 @@ export default {
     options: Array,
     selected: Array,
     loading: Boolean,
-    isSearch: Boolean
+    isSearch: Boolean,
+    labelText: String
   },
   components: {
     CheckboxEmpty, Checkbox

@@ -48,6 +48,8 @@ export default {
 |placeholder|Input placeholder|false|String|-|
 |loading|Options list standby mode|false|Boolean|false|
 |limit|Limit the number of visible items when the options list is closed|false|Number|10|
+|label-text|The name of the field in the options array, which should be in the label|false|String|label|
+|placeholder-as-label|Make a placeholder as a label that will be displayed at the top of the input field|false|Boolean|false|
 
 **will be complemented*
 

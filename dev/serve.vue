@@ -10,9 +10,9 @@ export default Vue.extend({
   data() {
     return {
       countries: [
-        { id: 'ru', label: 'Russia' },
-        { id: 'nl', label: 'Netherlands' },
-        { id: 'fr', label: 'France' }
+        { id: 'ru', country: 'Russia' },
+        { id: 'nl', country: 'Netherlands' },
+        { id: 'fr', country: 'France' }
       ],
       selected: []
     }
@@ -35,6 +35,8 @@ export default Vue.extend({
       :options="countries"
       @open="test('open', 1)"
       @close="test('close', 2)"
+      :label-text="'country'"
+      placeholder-as-label
     />
   </div>
 </template>

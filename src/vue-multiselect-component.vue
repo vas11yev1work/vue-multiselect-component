@@ -1,15 +1,23 @@
 <template>
   <div :id="`vue2-multi-select-${_uid}`" class="vue2-multi-select-wrap" @click="openDropdown">
-    <div :class="{ 'vue2-open': isOpen }" class="vue2-multi-select">
+    <div :class="{ 'vue2-open': isOpen, 'as-label': placeholderAsLabel }" class="vue2-multi-select">
       <div class="vue2-value-items">
-        <span v-if="!value.length && !inputValue" class="vue2-placeholder">{{ placeholder }}</span>
+        <span
+          v-if="!placeholderAsLabel ? !value.length && !inputValue : true"
+          class="vue2-placeholder"
+          :class="{
+            active: (placeholderAsLabel && value.length) || (placeholderAsLabel && inputValue)
+          }"
+        >
+          {{ placeholder }}
+        </span>
         <ValueItem
           v-for="item in listValue"
           :id="item"
           :key="item"
           @click="select"
         >
-          {{ getItem(item).label }}
+          {{ getItem(item)[labelText] }}
         </ValueItem>
         <Editor
           key="editor"
@@ -53,6 +61,7 @@
       :loading="loading"
       :options="searchItems"
       :selected="value"
+      :label-text="labelText"
       @remove="select"
       @select="select"
     />
@@ -92,7 +101,12 @@ export default {
     limit: {
       type: Number,
       default: 10
-    }
+    },
+    labelText: {
+      type: String,
+      default: 'label'
+    },
+    placeholderAsLabel: Boolean
   },
   data() {
     return {
@@ -124,9 +138,11 @@ export default {
       }
     },
     closeOptions() {
-      this.$emit('close')
-      this.isOpen = false
-      this.inputValue = ''
+      if (this.isOpen) {
+        this.$emit('close')
+        this.isOpen = false
+        this.inputValue = ''
+      }
     },
     openOptions() {
       if (!this.isOpen) {
@@ -168,20 +184,18 @@ export default {
     },
     clearItems() {
       this.$emit('input', [])
+    },
+    getItem(id) {
+      return this.options.find(el => el.id === id)
     }
   },
   computed: {
     internalValue() {
       return this.value || []
     },
-    getItem() {
-      return id => {
-        return this.options.find(el => el.id === id)
-      }
-    },
     searchItems() {
       if (this.searchable && this.searchValue.trim() && this.options.length) {
-        return this.options.filter(el => el.label.toLowerCase().includes(this.searchValue.toLowerCase()))
+        return this.options.filter(el => el[this.labelText].toLowerCase().includes(this.searchValue.toLowerCase()))
       }
       return this.options || []
     },
@@ -222,6 +236,10 @@ export default {
   cursor: text;
   display: flex;
 
+  &.as-label {
+    padding: 3px 5px 5px 5px;
+  }
+
   &.vue2-open {
     border-radius: 5px 5px 0 0;
   }
@@ -241,6 +259,16 @@ export default {
       position: absolute;
       margin-left: 5px;
       z-index: -1;
+      transition: .25s;
+      top: 0;
+      &.active {
+        top: -17px;
+        line-height: 14px;
+        font-size: 13px;
+        background-color: #fff;
+        padding: 0 2px;
+        z-index: 5;
+      }
     }
 
     .vue2-input-info {
